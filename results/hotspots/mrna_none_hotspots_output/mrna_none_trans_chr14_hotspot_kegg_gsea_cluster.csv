@@ -1,0 +1,7 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count","geneID_symbol"
+"mmu00120","Primary bile acid biosynthesis","1/2","16/8259",0.00387104216890022,0.013063183807848,NA,"93732",1,"Acox2"
+"mmu00511","Other glycan degradation","1/2","18/8259",0.004354394602616,0.013063183807848,NA,"18010",1,"Neu1"
+"mmu00600","Sphingolipid metabolism","1/2","48/8259",0.0115906054444487,0.0231812108888974,NA,"18010",1,"Neu1"
+"mmu04146","Peroxisome","1/2","84/8259",0.0202392211864778,0.0245747016157186,NA,"93732",1,"Acox2"
+"mmu03320","PPAR signaling pathway","1/2","85/8259",0.0204789180130989,0.0245747016157186,NA,"93732",1,"Acox2"
+"mmu04142","Lysosome","1/2","124/8259",0.0298042212974703,0.0298042212974703,NA,"18010",1,"Neu1"

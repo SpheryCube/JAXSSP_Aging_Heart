@@ -1,0 +1,2 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count","geneID_symbol"
+"mmu03010","Ribosome","7/18","175/8259",4.44704961402778e-08,1.11176240350694e-06,1.0298430685117e-06,"27050/20084/20085/19981/20005/67248/67945",7,"Rps3/Rps18/Rps19/Rpl37a/Rpl9/Rpl39/Rpl41"

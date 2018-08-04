@@ -1,0 +1,56 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0006754","ATP biosynthetic process","10/15","31/3861",6.47895820667027e-19,2.6369359901148e-16,2.16192605422576e-16,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009206","purine ribonucleoside triphosphate biosynthetic process","10/15","36/3861",3.69118097706283e-18,6.85425847088272e-16,5.61955239950814e-16,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009145","purine nucleoside triphosphate biosynthetic process","10/15","37/3861",5.05227897116662e-18,6.85425847088272e-16,5.61955239950814e-16,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009201","ribonucleoside triphosphate biosynthetic process","10/15","38/3861",6.84852103128372e-18,6.96837014933118e-16,5.71310833399194e-16,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0015992","proton transport","10/15","41/3861",1.61836064130009e-17,1.31734556201827e-15,1.08004278587816e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006818","hydrogen transport","10/15","42/3861",2.12157334839905e-17,1.43913392133069e-15,1.17989254639035e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009142","nucleoside triphosphate biosynthetic process","10/15","44/3861",3.56905164517878e-17,2.07514859941109e-15,1.70133740078447e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009127","purine nucleoside monophosphate biosynthetic process","10/15","46/3861",5.84949889854427e-17,2.48761402497743e-15,2.03950251110267e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009168","purine ribonucleoside monophosphate biosynthetic process","10/15","46/3861",5.84949889854427e-17,2.48761402497743e-15,2.03950251110267e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0015985","energy coupled proton transport, down electrochemical gradient","8/15","16/3861",6.72328114858766e-17,2.48761402497743e-15,2.03950251110267e-15,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0015986","ATP synthesis coupled proton transport","8/15","16/3861",6.72328114858766e-17,2.48761402497743e-15,2.03950251110267e-15,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0009156","ribonucleoside monophosphate biosynthetic process","10/15","47/3861",7.4216015525295e-17,2.51715985989959e-15,2.06372604574724e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009124","nucleoside monophosphate biosynthetic process","10/15","49/3861",1.17503841563243e-16,3.67877411663384e-15,3.01609050814154e-15,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:1902600","hydrogen ion transmembrane transport","8/15","27/3861",1.13927317291274e-14,3.11761522714556e-13,2.55601713954518e-13,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0009152","purine ribonucleotide biosynthetic process","10/15","75/3861",1.14899824096274e-14,3.11761522714556e-13,2.55601713954518e-13,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006164","purine nucleotide biosynthetic process","10/15","79/3861",1.98740038961738e-14,4.75807034455455e-13,3.90096547064217e-13,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009260","ribonucleotide biosynthetic process","10/15","79/3861",1.98740038961738e-14,4.75807034455455e-13,3.90096547064217e-13,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0046390","ribose phosphate biosynthetic process","10/15","82/3861",2.94050301888182e-14,6.29886699307843e-13,5.16420751792541e-13,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0072522","purine-containing compound biosynthetic process","10/15","82/3861",2.94050301888182e-14,6.29886699307843e-13,5.16420751792541e-13,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009165","nucleotide biosynthetic process","10/15","99/3861",2.09806848243731e-13,4.26956936175993e-12,3.5004616259612e-12,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:1901293","nucleoside phosphate biosynthetic process","10/15","101/3861",2.5811302814484e-13,5.00247630737856e-12,4.10134485824132e-12,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0015672","monovalent inorganic cation transport","10/15","111/3861",6.84123211218588e-13,1.26562794075439e-11,1.03764142562819e-11,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0046034","ATP metabolic process","10/15","129/3861",3.19364782655993e-12,5.65136811047779e-11,4.63334719002058e-11,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009205","purine ribonucleoside triphosphate metabolic process","10/15","141/3861",7.90277604715278e-12,1.34017910466299e-10,1.09876316094186e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009199","ribonucleoside triphosphate metabolic process","10/15","143/3861",9.11844853478944e-12,1.48448342146372e-10,1.21707292022242e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009144","purine nucleoside triphosphate metabolic process","10/15","147/3861",1.2064436360637e-11,1.88854830722279e-10,1.54835073940159e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009167","purine ribonucleoside monophosphate metabolic process","10/15","148/3861",1.29229069087106e-11,1.94177328117238e-10,1.59198792223366e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009126","purine nucleoside monophosphate metabolic process","10/15","149/3861",1.38357309960686e-11,1.94177328117238e-10,1.59198792223366e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009161","ribonucleoside monophosphate metabolic process","10/15","149/3861",1.38357309960686e-11,1.94177328117238e-10,1.59198792223366e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:1901137","carbohydrate derivative biosynthetic process","10/15","151/3861",1.58366619067911e-11,2.14850713202132e-10,1.76148134191325e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009123","nucleoside monophosphate metabolic process","10/15","153/3861",1.8093153231871e-11,2.37545592431338e-10,1.94754824261565e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009141","nucleoside triphosphate metabolic process","10/15","154/3861",1.93260141225451e-11,2.4580274212112e-10,2.01524555159434e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0090407","organophosphate biosynthetic process","10/15","160/3861",2.84387951585632e-11,3.50745140288947e-10,2.87562936691054e-10,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009150","purine ribonucleotide metabolic process","10/15","194/3861",1.97158058618391e-10,2.36009793699073e-09,1.93495679820526e-09,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009259","ribonucleotide metabolic process","10/15","198/3861",2.41774394798712e-10,2.81149081951645e-09,2.30503708725388e-09,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006163","purine nucleotide metabolic process","10/15","201/3861",2.8095235497785e-10,3.17632245766625e-09,2.60414902128592e-09,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0019693","ribose phosphate metabolic process","10/15","208/3861",3.95299457537061e-10,4.34829403290767e-09,3.56500506512798e-09,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0072521","purine-containing compound metabolic process","10/15","214/3861",5.24713221575537e-10,5.61995476792747e-09,4.60759255510929e-09,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006812","cation transport","10/15","245/3861",2.00722407872006e-09,2.09471846163863e-08,1.71738200527465e-08,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0009117","nucleotide metabolic process","10/15","264/3861",4.19318197804158e-09,4.26656266265731e-08,3.49799654483995e-08,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006753","nucleoside phosphate metabolic process","10/15","266/3861",4.51650144347912e-09,4.48345387194146e-08,3.67581760611779e-08,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0055086","nucleobase-containing small molecule metabolic process","10/15","281/3861",7.74248824558512e-09,7.50283979988844e-08,6.15130018508893e-08,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0098662","inorganic cation transmembrane transport","8/15","140/3861",1.27263534155092e-08,1.20456414886331e-07,9.87577486589087e-08,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0098660","inorganic ion transmembrane transport","8/15","148/3861",1.98087177654306e-08,1.83230639330233e-07,1.50224007934007e-07,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0098655","cation transmembrane transport","8/15","150/3861",2.20383654866143e-08,1.99324772290045e-07,1.63418990859807e-07,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:1901135","carbohydrate derivative metabolic process","10/15","330/3861",3.7201694693096e-08,3.29154124784567e-07,2.69861263563191e-07,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0006811","ion transport","10/15","332/3861",3.9451306913936e-08,3.4163153008451e-07,2.80091025570386e-07,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0055085","transmembrane transport","9/15","255/3861",7.34382825551914e-08,6.22695437499227e-07,5.10524902850782e-07,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1/Timm10",9
+"GO:0034220","ion transmembrane transport","8/15","182/3861",1.01504147434449e-07,8.43105877669812e-07,6.91231251057365e-07,"Atp5b/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5g3/Atp5k/Atp5c1",8
+"GO:0019637","organophosphate metabolic process","10/15","371/3861",1.15620865899771e-07,9.41153848424133e-07,7.7161714716268e-07,"Atp5b/Atp5s/Atp5a1/Atp5f1/Atp5d/Atp5e/Atp5j2/Atp5g3/Atp5k/Atp5c1",10
+"GO:0043535","regulation of blood vessel endothelial cell migration","2/15","14/3861",0.00124813591058396,0.009960614031523,0.00816633815593635,"Atp5b/Atp5a1",2
+"GO:0010595","positive regulation of endothelial cell migration","2/15","19/3861",0.00231921202554177,0.0178097980074623,0.0146015930903027,"Atp5b/Atp5a1",2
+"GO:0043534","blood vessel endothelial cell migration","2/15","19/3861",0.00231921202554177,0.0178097980074623,0.0146015930903027,"Atp5b/Atp5a1",2
+"GO:0001936","regulation of endothelial cell proliferation","2/15","29/3861",0.00538424590903134,0.0405812608328844,0.0332710712117531,"Atp5a1/Hmgb2",2
+"GO:0010594","regulation of endothelial cell migration","2/15","32/3861",0.00653369240549885,0.0483493238006915,0.0396398180391031,"Atp5b/Atp5a1",2

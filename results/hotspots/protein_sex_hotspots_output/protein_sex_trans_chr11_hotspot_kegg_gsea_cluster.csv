@@ -1,0 +1,4 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count","geneID_symbol"
+"mmu05410","Hypertrophic cardiomyopathy (HCM)","3/8","84/8259",5.47911063853824e-05,0.000390921918024329,0.000308622566861312,"22138/17868/11464",3,"Ttn/Mybpc3/Actc1"
+"mmu05414","Dilated cardiomyopathy (DCM)","3/8","89/8259",6.51536530040548e-05,0.000390921918024329,0.000308622566861312,"22138/17868/11464",3,"Ttn/Mybpc3/Actc1"
+"mmu03040","Spliceosome","2/8","133/8259",0.00676333107756921,0.0270533243102768,0.0213578876133764,"20382/60365",2,"Srsf2/Rbm8a"

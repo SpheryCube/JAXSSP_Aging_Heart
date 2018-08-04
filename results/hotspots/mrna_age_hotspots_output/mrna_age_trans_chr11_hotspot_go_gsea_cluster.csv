@@ -1,0 +1,7 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0010633","negative regulation of epithelial cell migration","3/22","54/15735",5.61836114885454e-05,0.0384295902581651,0.0299843063417816,"Klf4/Ptprr/Rgcc",3
+"GO:0030336","negative regulation of cell migration","4/22","215/15735",0.00020437920855022,0.0483162049115209,0.0376982392892291,"Klf4/Ptprr/Rgcc/Plxnb3",4
+"GO:2000146","negative regulation of cell motility","4/22","228/15735",0.000255820357130112,0.0483162049115209,0.0376982392892291,"Klf4/Ptprr/Rgcc/Plxnb3",4
+"GO:0051271","negative regulation of cellular component movement","4/22","242/15735",0.000321025571459138,0.0483162049115209,0.0376982392892291,"Klf4/Ptprr/Rgcc/Plxnb3",4
+"GO:0040013","negative regulation of locomotion","4/22","258/15735",0.000409304632424182,0.0483162049115209,0.0376982392892291,"Klf4/Ptprr/Rgcc/Plxnb3",4
+"GO:0043537","negative regulation of blood vessel endothelial cell migration","2/22","22/15735",0.00042382635887299,0.0483162049115209,0.0376982392892291,"Klf4/Rgcc",2

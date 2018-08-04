@@ -1,0 +1,5 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0071230","cellular response to amino acid stimulus","4/42","57/15735",1.56305133881701e-05,0.015722595708055,0.0136221264412765,"Dnmt1/Zeb1/Ubr1/Pdgfra",4
+"GO:0043200","response to amino acid","4/42","67/15735",2.974947153842e-05,0.015722595708055,0.0136221264412765,"Dnmt1/Zeb1/Ubr1/Pdgfra",4
+"GO:0018205","peptidyl-lysine modification","6/42","287/15735",0.000105535848915845,0.0369381590175569,0.0320033843004278,"Sae1/Dnmt1/Nfatc2ip/Smarca4/Brca2/Capn3",6
+"GO:0016925","protein sumoylation","3/42","38/15735",0.000139784896944397,0.0369381590175569,0.0320033843004278,"Sae1/Nfatc2ip/Capn3",3

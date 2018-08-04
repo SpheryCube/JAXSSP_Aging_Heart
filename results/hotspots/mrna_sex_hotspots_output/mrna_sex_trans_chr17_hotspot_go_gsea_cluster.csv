@@ -1,0 +1,4 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0019730","antimicrobial humoral response","3/33","36/15735",5.72412674020381e-05,0.039095785635592,0.0339229826814184,"Rps19/Ighg1/Rpl39",3
+"GO:0006959","humoral immune response","4/33","125/15735",0.000129932992783526,0.040804757975977,0.0354058391623257,"Rps19/Ighg1/Rpl39/Susd4",4
+"GO:0050727","regulation of inflammatory response","5/33","256/15735",0.000179230269294189,0.040804757975977,0.0354058391623257,"Rps19/Ighg1/Tnfaip8l2/Mefv/Susd4",5
