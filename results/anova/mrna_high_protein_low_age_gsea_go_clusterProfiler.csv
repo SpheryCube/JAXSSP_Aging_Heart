@@ -1,0 +1,3 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count"
+"GO:0052547","regulation of peptidase activity","12/101","115/3800",4.08425372594816e-05,0.0494223079416357,0.0490793293260609,"Bcap31/Pzp/A2m/Cst3/Mapk3/Serpina1b/Serpina1e/Lyn/Serpinb6a/Mical1/Serpina3g/Ctsh",12
+"GO:0034754","cellular hormone metabolic process","5/101","17/3800",5.76689707603684e-05,0.0494223079416357,0.0490793293260609,"Scp2/Comt/Ttr/Adh7/Rbp4",5

@@ -1,0 +1,2 @@
+"ID","Description","GeneRatio","BgRatio","pvalue","p.adjust","qvalue","geneID","Count","geneID_symbol"
+"mmu05418","Fluid shear stress and atherosclerosis","8/83","143/8259",8.76064221301877e-05,0.0143674532293508,0.0126337682440376,"14865/18613/11898/19354/14873/15894/14857/22329",8,"Gstm4/Pecam1/Ass1/Rac2/Gsto1/Icam1/Gsta1/Vcam1"
