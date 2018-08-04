@@ -1,0 +1,28 @@
+Warning message:
+In dir.create(output_dir) :
+  '/fastscratch/c-alfond/do_heart/results/hotspots' already exists
+-- Attaching packages --------------------------------------- tidyverse 1.2.1 --
+<U+221A> ggplot2 3.0.0     <U+221A> purrr   0.2.4
+<U+221A> tibble  1.4.2     <U+221A> dplyr   0.7.4
+<U+221A> tidyr   0.8.0     <U+221A> stringr 1.3.0
+<U+221A> readr   1.1.1     <U+221A> forcats 0.3.0
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+
+Attaching package: 'qtl2'
+
+The following object is masked from 'package:readr':
+
+    read_csv
+
+Loading required package: foreach
+
+Attaching package: 'foreach'
+
+The following objects are masked from 'package:purrr':
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
