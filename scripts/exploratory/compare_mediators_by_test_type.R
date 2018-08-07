@@ -1,3 +1,8 @@
+# Daniel Alfonsetti
+# August 7, 2018 
+rm(list = ls())
+
+library(tidyverse)
 library(reshape2)
 mrna_sex_mrna_mediators <- read.csv("~/do_heart/results/hotspots/mrna_sex_hotspots_output/mrna_sex_hotspot_mrna_mediators_r10.csv")
 mrna_sex_protein_mediators <- read.csv("~/do_heart/results/hotspots/mrna_sex_hotspots_output/mrna_sex_hotspot_protein_mediators_r10.csv")
@@ -42,13 +47,12 @@ colnames(result) <- c("mRNA_Sex: mRNA", "mRNA_Sex: Protein",
 result <-  melt(result)
 
 ggplot(data = result, aes(x=variable, y=value)) + 
-  geom_boxplot(aes(fill=variable), alpha = 0.3) +
+  geom_boxplot(aes(fill=variable)) +
   theme_linedraw() + 
-  geom_violin() + 
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   ylab("Change in Interaction Effect with Mediator") +
-  # geom_violin(alpha = 0.3) +
   labs(fill = "OutcomeType_Intcovar: \n MediatorType") +
   ggtitle("Interactive QTL Mediation Analysis Result Summaries for Various Scan Types")
+
