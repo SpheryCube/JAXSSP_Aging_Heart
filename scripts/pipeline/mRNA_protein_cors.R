@@ -12,7 +12,7 @@ rm(list=ls())
 input <- "~/do_heart/data/cleaned_data.RData"
 load(input)
 output_prefix <- "~/do_heart/results/mrna_protein_cors/"
-
+dir.create(output_prefix)
 # Using HPC directories
 # input <- "/home/c-alfond/do_heart/data/cleaned_data.RData"
 # load(input)

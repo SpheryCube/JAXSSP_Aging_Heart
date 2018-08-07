@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/bin/bash\n#PBS -l walltime=30:00:00\n#PBS -l nodes=1:ppn=30\n#PBS -N QTL_job using data cmd\nmodule load R/3.4.4\nRscript \"/fastscratch/c-alfond/do_heart/scripts/pipeline/qtls/scans/qtl.R\"\n",
+    "created" : 1532100671378.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "658606316",
+    "id" : "AAA618",
+    "lastKnownWriteTime" : 1532101226,
+    "last_content_update" : 1532101226686,
+    "path" : "~/do_heart/scripts/pipeline/qtls/scans/qtl.sh",
+    "project_path" : "scripts/pipeline/qtls/scans/qtl.sh",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "sh"
+}

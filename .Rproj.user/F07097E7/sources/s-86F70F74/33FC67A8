@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528829184334.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "33FC67A8",
+    "lastKnownWriteTime" : 1528828201,
+    "last_content_update" : 1528829184334,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7B917126",
+        "caption" : "expr.mrna",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=expr.mrna&cache_key=7B917126",
+        "displayedObservations" : 189,
+        "environment" : "",
+        "object" : "expr.mrna",
+        "preview" : 0,
+        "totalObservations" : 189,
+        "variables" : 21169
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

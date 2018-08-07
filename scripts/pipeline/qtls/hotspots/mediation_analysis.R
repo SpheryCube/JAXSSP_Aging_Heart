@@ -54,7 +54,7 @@ a_covars <- cbind(sex, age)
 #######################
 
 
-# for (test_type in c("protein_age", "protein_sex", "mrna_age", "mrna_sex"))
+for (test_type in c("mrna_sex")) {
 # foreach (test_type = c("protein_age", "protein_sex", "mrna_age", "mrna_sex")) %dopar% {
   # foreach (test_type = c("mrna_sex")) %dopar% {
   # Debugging

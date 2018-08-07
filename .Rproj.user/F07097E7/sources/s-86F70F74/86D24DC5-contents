@@ -1,0 +1,488 @@
+---
+title: "Heart_RNA_Protein.R"
+author: "Daniel"
+date: "6/11/2018"
+output: html_document
+---
+
+PCA analysis of heart RNA and Protein data
+adapted from Petr's script to use pcaMethods package
+by GAC Nov 12, 2016
+
+Further edited by Daniel Alfonsetti. (Last edit:  June 11, 2018)
+
+```{r setup, include=TRUE}
+library(ggplot2)
+library(pcaMethods)
+library(dplyr)
+load("/Users/c-alfond/Desktop/first_data/Data_R/DO189_heart_v2_noprobs.RData")
+ls()
+str(N)
+str(annot.samples)
+```
+
+
+```{r Clean up data structures, include= TRUE}
+
+
+# Convert chr to an ordered factor
+annot.mrna$chr <- factor(annot.mrna$chr,
+                         levels=c(as.character(1:19),"X","Y","M"))
+annot.protein$chr <- factor(annot.protein$ch,
+                            levels=c(as.character(1:19),"X","Y","M"))
+
+
+# Change some names
+annot.protein <- rename(annot.protein, protein_id=id)
+annot.protein <- rename(annot.protein, middle=middle_point)
+annot.mrna <- rename(annot.mrna, gene_id=id)
+annot.mrna <- rename(annot.mrna, middle=middle_point)
+annot.samples <- rename(annot.samples, TMT=Tag, Sample.ID=Sample.Number)
+annot.sample <- transform(annot.samples, Batch=factor(substring(Batch,1,4)),
+                          NYGC.ID=substring(NYGC.ID,first=11),
+                          Sample.ID = as.integer(Sample.ID),
+                          Age=as.integer(Age), Sex=factor(Sex),
+                          Generation=factor(Generation,levels=c("G8","G9","G10","G11","G12")),
+                          f.Age=factor(Age, levels=c("6mos","12mos","18mos")))
+rm(annot.samples)
+
+# Save sex and age numeric values
+Sex <- as.numeric(as.factor(annot.sample$Sex))
+Age <- as.numeric(annot.sample$Age)
+
+# Note that there are no mitochondrial encoded proteins
+table(annot.mrna$chr)
+table(annot.protein$chr)
+table(annot.protein$chr[1:N$pairs], annot.mrna$chr[1:N$pairs])
+```
+
+
+```{r Identify basic patterns and look at missing data, include = TRUE}
+# look at missing data in expr.protein
+dim(expr.protein)
+# 189 samples x 4193 proteins
+# note: data are row-normalized scores
+
+
+print("Number of missing proteins per mouse")
+table(apply(is.na(expr.protein),1,sum))
+
+
+print("There are 2489 proteins with no missing data:")
+table(apply(is.na(expr.protein),2,sum))
+# pattern is strange - there are lots of proteins that are missing for
+# blocks of 10 mice, but there are many that are not in multiples of 10.
+
+
+print("Confirm no missing data in the 'complete' set")
+sum(apply(is.na(expr.protein[,1:N$complete]),1,sum))
+
+# Note that there are 2459 proteins in the complete set
+# but 2489 proteins with no missing data.
+
+# Create a no-missing data indx for proteins
+# to capture all of the complete proteins
+nomiss.dx <- !apply(is.na(expr.protein), 2, any)
+str(nomiss.dx)
+sum(nomiss.dx)
+
+
+# Confirm no missing data in the mRNA set
+sum(apply(is.na(expr.mrna),1,sum))
+
+
+# Scatter plot protein against RNA
+# Basically linear as expected?
+ggplot(data.frame(RNA=expr.mrna[,100], Protein=expr.protein[,100],
+                  Sex=annot.sample$Sex),
+       aes(x=RNA, y=Protein, color=Sex)) + geom_point() + geom_smooth(method="lm")
+
+```
+
+
+```{r Checking data structures, include= FALSE}
+# row names are Mouse_ID sorted and aligned
+rownames(expr.protein)
+rownames(expr.mrna)
+
+#column names are protein_id
+colnames(expr.protein)
+
+#column names are gene_id
+colnames(expr.mrna)
+
+dim(expr.mrna)
+dim(expr.protein)
+```
+
+
+```{r Principle Component Analysis (Using pcaMethods package) [Protein], include=TRUE}
+
+# use svd imputation for missing proteins
+pca.prot <- pca(expr.protein[,1:N$pairs], method="svdImpute", center=FALSE, nPcs=10)
+
+# Extract scores from protein SVD
+pca.prot.scores <- data.frame(annot.sample[,c(1:4,7,8,11)], scores(pca.prot))
+names(pca.prot.scores)
+
+# PC1 and PC2
+ggplot(pca.prot.scores, aes(x=PC1, y=PC2, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+# PC2 seems to seperate Age well. Do I ANOVA this to make this quantitative?
+ggplot(pca.prot.scores, aes(x=PC1, y=PC2, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+# PC2 and PC3
+ggplot(pca.prot.scores, aes(x=PC2, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+ggplot(pca.prot.scores, aes(x=PC2, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+# PC1 and PC3
+ggplot(pca.prot.scores, aes(x=PC1, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+ggplot(pca.prot.scores, aes(x=PC1, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+
+# PC2 seems to seperate Age while PC3 seems to seperate sex.
+
+```
+
+```{r Principle Component Analysis (Using pcaMethods package) [mRNA], include=TRUE}
+
+pca.mrna <- pca(expr.mrna[,1:N$pairs], method="svd", center=FALSE, nPcs=10)
+plot(pca.mrna)
+# use svd imputation for missing proteins
+# Extract scores from protein SVD
+pca.mrna.scores <- data.frame(annot.sample[,c(1:4,7,8,11)], scores(pca.mrna))
+names(pca.mrna.scores)
+
+
+# PC1 and PC2
+ggplot(pca.mrna.scores, aes(x=PC1, y=PC2, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+# PC2 seems to seperate Age well. Do I ANOVA this to make this quantitative?
+ggplot(pca.mrna.scores, aes(x=PC1, y=PC2, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+# PC2 and PC3
+ggplot(pca.mrna.scores, aes(x=PC2, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+ggplot(pca.mrna.scores, aes(x=PC2, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+# PC1 and PC3
+ggplot(pca.mrna.scores, aes(x=PC1, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+ggplot(pca.mrna.scores, aes(x=PC1, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+
+# PC2 seems to seperate Age while PC3 seems to seperate sex.
+
+```
+
+```{r Principle Component Analysis (Using built in R function) [Protein], include=TRUE}
+
+# Exclude missing proteins (only use first 2459 values)
+prc.mrna <- prcomp(expr.mrna[,1:N$complete], scale.=TRUE)
+prc.prot <- prcomp(expr.protein[,1:N$complete], scale.=TRUE)
+
+
+# Scores is the transformed data. (Data multipled by rotation matrix)
+prc.prot.scores <- data.frame(annot.sample[,c(1:4,7,8,11)],prc.prot$x[,1:10])
+names(prc.prot.scores)
+
+
+# PC1 and PC2
+ggplot(prc.prot.scores, aes(x=PC1, y=PC2, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+ggplot(prc.prot.scores, aes(x=PC1, y=PC2, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+# PC2 and PC3
+ggplot(prc.prot.scores, aes(x=PC2, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+ggplot(prc.prot.scores, aes(x=PC2, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+
+# PC1 and PC3
+ggplot(prc.prot.scores, aes(x=PC1, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+ggplot(prc.prot.scores, aes(x=PC1, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("Protein Complete Cases")
+
+# PC2 seems to seperate Age while PC3 seems to seperate sex again. Do I ANOVA this to make this quantitative?
+
+```
+
+```{r Principle Component Analysis (Using built in R function) [mRNA], include=TRUE}
+
+# Exclude missing proteins (only use first 2459 values)
+prc.mrna <- prcomp(expr.mrna[,1:N$complete], scale.=TRUE)
+
+# Scores is the transformed data. (Data multipled by rotation matrix)
+prc.mrna.scores <- data.frame(annot.sample[,c(1:4,7,8,11)],prc.mrna$x[,1:10])
+names(prc.mrna.scores)
+
+
+# PC1 and PC2
+ggplot(prc.mrna.scores, aes(x=PC1, y=PC2, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+ggplot(prc.mrna.scores, aes(x=PC1, y=PC2, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+# PC2 and PC3
+ggplot(prc.mrna.scores, aes(x=PC2, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+ggplot(prc.mrna.scores, aes(x=PC2, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+
+# PC1 and PC3
+ggplot(prc.mrna.scores, aes(x=PC1, y=PC3, color=Sex)) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+ggplot(prc.mrna.scores, aes(x=PC1, y=PC3, color=factor(Age))) +
+  geom_point(size=2) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  ggtitle("mRNA Complete Cases")
+
+# PC2 seems to seperate Age while PC3 seems to seperate sex again. Do I ANOVA this to make this quantitative?
+
+```
+
+
+```{r Compare the two PCAs methods, include= TRUE}
+
+# What does this mean/show?
+qplot(pca.prot.scores$PC1, prc.prot.scores$PC1, color=factor(Sex), shape=factor(Age)) +
+  xlab("SVDImpute") + ylab("Complete Cases")
+
+
+# look at the eigenvalues
+print("mRNA Eigenvalues")
+prc.mrna$sdev[1:10]
+pca.mrna@sDev
+
+print("Protein Eigenvalues")
+prc.prot$sdev[1:10]
+pca.prot@sDev
+
+# Eigenvalues for PCA (SVD imputation method) are larger (pairwise) than eigenvalues for PRC.
+
+# mRNA eigenvalues match up well but protein doesn't.
+prc1_mrna <- prc.mrna$rotation[1,]
+pca1_mrna <- pca.mrna@scores[,1]
+plot(prc1_mrna, pca1_mrna) 
+
+prc1_prot <- prc.prot$rotation[1,]
+pca1_prot <- pca.prot@scores[,1]
+plot(prc1_prot, pca1_prot)
+
+# Why do we only use the imputed SVD method results going forward?
+
+# Biplots take a while to run
+# biplot(pca.mrna)
+# biplot(prc.mrna)
+```
+
+
+```{r Further Analysis using only the results from the imputed loadings, incude = TRUE}
+# We are only using pca from here on down.
+# Isn't the fact that Sex and Age are categorical variables a problem
+# when looking at correlation?
+round(cor(cbind(Sex,Age,pca.prot@scores)), 3)
+round(cor(cbind(Sex,Age,pca.mrna@scores)), 3)
+
+
+
+print("# How much is explained by top 10 PCAs?")
+print("---------------")
+print("mRNA")
+print("% Variance explained by eigenvector: ")
+pca.mrna@sDev[1:10]^2 / sum(pca.mrna@sDev^2)
+print("R2")
+pca.mrna@R2 
+print("R2 cumulative")
+pca.mrna@R2cum
+
+print("Protein")
+print("% Variance explained by eigenvector: ")
+pca.prot@sDev[1:10]^2 / sum(pca.prot@sDev^2)
+print("R2")
+pca.prot@R2
+print("R2 cumulative")
+pca.prot@R2cum
+
+# Why is there a discrepancy?
+
+loadings.mrna <- pca.mrna@loadings[,1:10]
+loadings.prot <- pca.prot@loadings[,1:10]
+colnames(loadings.mrna) <- paste(colnames(loadings.mrna), "mrna", sep="_")
+colnames(loadings.prot) <- paste(colnames(loadings.prot), "prot", sep="_")
+
+output <- cbind(annot.protein[1:4122,], abs(loadings.mrna), abs(loadings.prot))
+write.csv(output, file= 'Loadings_with_complete_data.csv', row.names=FALSE)
+
+str(output)
+```
+
+
+```{r Predictions using PCA, include = TRUE}
+
+# What's the idea behind here?
+# Errors here.
+predict.mrna <- predict(pca.mrna)[,1:10]
+predict.prot <- predict(pca.prot)[,1:10]
+
+colnames(predict.mrna) <- paste(colnames(predict.mrna), "mrna", sep="_")
+colnames(predict.prot) <- paste(colnames(predict.prot), "prot", sep="_")
+
+output2 <- cbind(annot.sample, predict.mrna, predict.prot)
+write.csv(output2, file=output.file.csv2, row.names=FALSE)
+
+pdf(file=output.file.pdf)
+
+# PCA plots - mRNA
+ggplot(aes(x=PC1_mrna, y=PC2_mrna, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("mrna: PCA1 vs. PCA2") +
+  theme_bw()
+
+ggplot(aes(x=PC2_mrna, y=PC3_mrna, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("mrna: PCA2 vs. PCA3") +
+  theme_bw()
+
+ggplot(aes(x=PC1_mrna, y=PC3_mrna, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("mrna: PCA1 vs. PCA3") +
+  theme_bw()
+
+
+# PCA plots - protein
+ggplot(aes(x=PC1_prot, y=PC2_prot, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("protein: PCA1 vs. PCA2") +
+  theme_bw()
+
+ggplot(aes(x=PC2_prot, y=PC3_prot, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("protein: PCA2 vs. PCA3") +
+  theme_bw()
+
+ggplot(aes(x=PC1_prot, y=PC3_prot, shape=Sex, color=factor(Age)), data=output2) +
+  geom_point(size=I(3)) +
+  ggtitle("protein: PCA1 vs. PCA3") +
+  theme_bw()
+
+dev.off()
+```
+
+
+```{r One-Way ANOVA on first 10 PCs for Sex, Generation, Age, Batch, Tag, and ChrM}
+
+scores.mrna <- pca.mrna@scores[,1:10]
+scores.prot <- pca.prot@scores[,1:10]
+colnames(scores.mrna) <- paste(colnames(scores.mrna), "mrna", sep="_")
+colnames(scores.prot) <- paste(colnames(scores.prot), "prot", sep="_")
+
+output <- cbind(annot.sample, scores.mrna, scores.prot)
+str(output)
+write.csv(output, file= 'Dataframe_for_anova.csv', row.names=FALSE)
+
+
+
+```
+
+
+
+
+
+
+
+
+```{r random stuff, include = TRUE}
+  # plot_title <- paste("Age vs", symbol, "Expression", sep = " ")
+  # 
+  # plot_age <- ggplot(df, aes(x=df$Age, y=expr, color=df$Age)) +
+  #   geom_point(size=2) + 
+  #   geom_smooth(method = "lm", se = FALSE) + ggtitle(plot_title) +
+  #   ylab("Normalized Expression level") +
+  #   xlab("Age")
+  # 
+  # print(plot_age)
+  # 
+  # plot_title <- paste("Sex vs", symbol, "Expression", sep = " ")
+  # 
+  # plot_sex <- ggplot(df, aes(x=df$Sex, y=expr, color=df$Sex)) +
+  #   geom_point(size=2) + 
+  #   geom_smooth(method = "lm", se = FALSE) + 
+  #   ggtitle(plot_title) +
+  #   ylab("Normalized Expression level") +
+  #   xlab("Sex")
+  # 
+  # print(plot_sex)
+
+
+```

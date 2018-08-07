@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1528825212500.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7FB59D52",
+    "lastKnownWriteTime" : 1528829138,
+    "last_content_update" : 1528829138870,
+    "path" : "~/Desktop/first_data/scripts/p-value_table.Rmd",
+    "project_path" : "scripts/p-value_table.Rmd",
+    "properties" : {
+        "cursorPosition" : "58,35",
+        "last_setup_crc32" : "86F70F745688ab5b",
+        "scrollLine" : "30"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,107 @@
+---
+title: "p-value table"
+author: "Daniel"
+date: "6/11/2018"
+output: html_document
+---
+
+```{r setup, include=TRUE}
+library(ggplot2)
+library(pcaMethods)
+library(dplyr)
+load("/Users/c-alfond/Desktop/first_data/Data_R/DO189_heart_v2_noprobs.RData")
+ls()
+str(N)
+str(annot.samples)
+```
+
+
+```{r Clean up data structures, include= TRUE}
+# This chunk of code was adapted from Gary Churchill's script
+
+# Convert chr to an ordered factor
+annot.mrna$chr <- factor(annot.mrna$chr,
+                         levels=c(as.character(1:19),"X","Y","M"))
+annot.protein$chr <- factor(annot.protein$ch,
+                            levels=c(as.character(1:19),"X","Y","M"))
+
+
+# Change some names
+annot.protein <- rename(annot.protein, protein_id=id)
+annot.protein <- rename(annot.protein, middle=middle_point)
+annot.mrna <- rename(annot.mrna, gene_id=id)
+annot.mrna <- rename(annot.mrna, middle=middle_point)
+annot.samples <- rename(annot.samples, TMT=Tag, Sample.ID=Sample.Number)
+annot.sample <- transform(annot.samples, Batch=factor(substring(Batch,1,4)),
+                          NYGC.ID=substring(NYGC.ID,first=11),
+                          Sample.ID = as.integer(Sample.ID),
+                          Age=as.integer(Age), Sex=factor(Sex),
+                          Generation=factor(Generation,levels=c("G8","G9","G10","G11","G12")),
+                          f.Age=factor(Age, levels=c("6mos","12mos","18mos")))
+rm(annot.samples)
+
+# Save sex and age numeric values
+Sex <- as.numeric(as.factor(annot.sample$Sex))
+Age <- as.numeric(annot.sample$Age)
+
+# Note that there are no mitochondrial encoded proteins
+table(annot.mrna$chr)
+table(annot.protein$chr)
+table(annot.protein$chr[1:N$pairs], annot.mrna$chr[1:N$pairs])
+```
+
+```{r mrna, include= TRUE}
+
+mrna_gene_ids <- annot.mrna$gene_id[1]  # Just do first 10 for now
+
+# For each gene, check if age and sex account for variability within the data
+
+# for(current_id in mrna_gene_ids){
+current_id = mrna_gene_ids
+expr_data <- expr.mrna[, current_id]  # Use ID as key to get expression data from the expr.mrna matrix
+  df <- cbind(annot.sample$Batch, annot.sample$Generation, annot.sample$Age, annot.sample$Sex, annot.sample$TMT, expr_data)
+  colnames(df) <- c("Batch", "Generation", "Age", "Sex", "TMT", "expr")
+  
+  df <- as.data.frame(df)
+
+  
+  gene_row <- annot.mrna %>% filter(gene_id == current_id)
+  symbol = gene_row$symbol
+  
+  df$expr <- as.numeric(df$expr)
+  
+  # # Perform t-test on sex
+  # # Seperate groups
+  # males <- df %>% filter(df$Sex == 1)
+  # females <- df %>% filter(df$Sex == 2)
+  # res.t <- t.test(x = males$expr, y = females$expr)
+  # sex_p_value <- res.t$p.value  
+  
+  # # Perform linear regression on age.
+  # # Seperate groups
+  # age_6 <- df %>% filter(df$Age == 6)
+  # age_12 <- df %>% filter(df$Age == 12)
+  # age_18 <- df %>% filter(df$Age == 18)
+  
+  lm.result <- lm(expr ~ Batch + Generation + Age + Sex + TMT, data = df)
+  lm.sum <- summary(lm.result)
+  
+  lm.result.no.age <- lm(expr ~ Batch + Generation + Sex + TMT, data = df)
+  lm.sum.no.age <- summary(lm.result.no.age)
+  
+  lm.result.no.sex <- lm(expr ~ Batch + Generation + Age + TMT, data = df)
+  lm.sum.no.sex <- summary(lm.result.no.sex)
+  
+  anova.result.age <- anova(lm.result.no.age, lm.result)   # What does it mean to take the difference of linear models 
+  anova.result.sex <- anova(lm.result.no.sex, lm.result)
+  
+  p.value.age <- unlist(anova.result.age)["Pr(>F)2"]
+  p.value.sex <- unlist(anova.result.sex)["Pr(>F)2"]
+
+  
+    
+  # res.aov <- aov(df$expr ~ df$Age, data = df)
+  # sum_obj <- summary(res.aov)
+  # age_p_value <- sum_obj[[1]][, 5][1]
+  
+```

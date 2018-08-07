@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/bin/bash\n#PBS -l walltime=40:00:00\n#PBS -l nodes=1:ppn=15\n#PBS -N get_qtl_peaks_job using data cmd\nmodule load R/3.4.4\nRscript \"/fastscratch/c-alfond/do_heart/scripts/pipeline/qtls/scans/get_qtl_peaks.R\"",
+    "created" : 1532290198359.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3632973533",
+    "id" : "29EA5A63",
+    "lastKnownWriteTime" : 1532291040,
+    "last_content_update" : 1532291040193,
+    "path" : "~/do_heart/scripts/pipeline/qtls/scans/get_qtl_peaks.sh",
+    "project_path" : "scripts/pipeline/qtls/scans/get_qtl_peaks.sh",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "sh"
+}

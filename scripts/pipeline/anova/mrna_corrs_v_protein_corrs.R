@@ -15,6 +15,7 @@ library(broom)
 library(tidyverse)
 library(grid)
 library(allez)
+library('org.Mm.eg.db')
 library(clusterProfiler)
 #######################
 
@@ -25,7 +26,7 @@ output_dir <- "~/do_heart/results/anova/"
 dir.create(output_dir)
 setwd(output_dir)
 
-anovas <- read.csv("~/do_heart/results/anova/anova_output.csv")
+anovas <- read.csv("~/do_heart/results/anova_output.csv")
 #######################
 sex <- as.numeric(annot.sample$Sex) # 1 is female, 2 is male
 names(sex) <- rownames(annot.sample)

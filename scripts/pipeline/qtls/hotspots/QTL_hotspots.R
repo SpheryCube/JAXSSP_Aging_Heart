@@ -11,7 +11,7 @@ rm(list = ls())
 gc()
 
 library(qtl2)
-library(broom) 
+library(broom)
 library(RColorBrewer)
 library(doParallel)
 library(pcaMethods)
@@ -24,28 +24,28 @@ library(tidyverse) # Contains ggplot2, dplyr, stringr and some other stuff
 library(clusterProfiler)
 
 ######## Local directories
-# num_cores <- 30
-# 
-# # Input paths
-# peaks_tables_dir <- "~/do_heart/results/"
-# perms_input_dir <- "~/do_heart/results/"
-# 
-# # Output paths
-# base_output_dir <- "~/do_heart/results/hotspots/"
-# dir.create(base_output_dir)
-# load("~/do_heart/data/cleaned_data.RData")
+num_cores <- 2
+
+# Input paths
+peaks_tables_dir <- "~/do_heart/results/"
+perms_input_dir <- "~/do_heart/results/"
+
+# Output paths
+base_output_dir <- "~/do_heart/results/hotspots/"
+dir.create(base_output_dir)
+load("~/do_heart/data/cleaned_data.RData")
 
 ######## HPC directories
-num_cores <- 30
-#
-# Input paths
-peaks_tables_dir <- "/fastscratch/c-alfond/do_heart/results/"
-perms_input_dir <- "/fastscratch/c-alfond/do_heart/results/"
-#
-# # Output paths
-base_output_dir <- "/fastscratch/c-alfond/do_heart/results/hotspots/"
-dir.create(base_output_dir)
-load("/fastscratch/c-alfond/do_heart/data/cleaned_data.RData")
+# num_cores <- 30
+# #
+# # Input paths
+# peaks_tables_dir <- "/fastscratch/c-alfond/do_heart/results/"
+# perms_input_dir <- "/fastscratch/c-alfond/do_heart/results/"
+# #
+# # # Output paths
+# base_output_dir <- "/fastscratch/c-alfond/do_heart/results/hotspots/"
+# dir.create(base_output_dir)
+# load("/fastscratch/c-alfond/do_heart/data/cleaned_data.RData")
 
 ##########################################################
 # Register parallele back end.
@@ -437,8 +437,8 @@ peaks_files <- peaks_files[!grepl("full", peaks_files)]
 print(peaks_files)
 
 pdf("preliminary_hotspot_results.pdf")
-foreach (test_type = c("mrna_none", "mrna_sex", "mrna_age", "protein_none", "protein_sex", "protein_age")) %dopar% {
-# for (test_type in c("mrna_none", "mrna_sex", "mrna_age", "protein_none", "protein_sex", "protein_age"))  {
+# foreach (test_type = c("mrna_none", "mrna_sex", "mrna_age", "protein_none", "protein_sex", "protein_age")) %dopar% {
+for (test_type in c("mrna_none", "mrna_sex", "mrna_age", "protein_none", "protein_sex", "protein_age"))  {
   
   # Set some parameters
   if (grepl("protein", test_type)) {expr_type = "protein"} else {expr_type = "mrna"}
@@ -505,7 +505,7 @@ tests <- list(c("mrna_none", 80, 75), c("mrna_sex", 0, 40), c("mrna_age", 0, 25)
 # Iterate over each test. For each hotspot get hotspot genes,
 # make principal component plots, and do enrichment analysis
 
-foreach (test_params = tests) %dopar% {
+for (test_params in tests) {
 # for (test_params in tests) {
   
   print(test_params)

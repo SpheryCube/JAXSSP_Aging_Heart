@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/bin/bash\n#PBS -l walltime=30:00:00\n#PBS -l nodes=1:ppn=30\n#PBS -N QTL_hotspots_job using data cmd\nmodule load R/3.4.4\nRscript \"/home/c-alfond/do_heart/scripts/pipeline/qtls/scans/QTL_hotspots_v4.R\"\n",
+    "created" : 1532291137923.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1776368472",
+    "id" : "4B1ED1D",
+    "lastKnownWriteTime" : 1532035162,
+    "last_content_update" : 1532035162,
+    "path" : "~/do_heart/scripts/pipeline/qtls/scans/QTL_hotspots.sh",
+    "project_path" : "scripts/pipeline/qtls/scans/QTL_hotspots.sh",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "sh"
+}

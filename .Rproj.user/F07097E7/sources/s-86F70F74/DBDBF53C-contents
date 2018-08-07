@@ -1,0 +1,353 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Nduf Analysis},
+            pdfauthor={Daniel},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Nduf Analysis}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Daniel}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{6/11/2018}
+
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Nduf_subset_mrna <-}\StringTok{ }\NormalTok{annot.mrna }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(symbol, }\StringTok{"Nduf"}\NormalTok{))}
+\NormalTok{mrna_gene_ids <-}\StringTok{ }\NormalTok{Nduf_subset_mrna}\OperatorTok{$}\NormalTok{id}
+
+\CommentTok{# For each gene, check if age and sex account for variability within the data}
+\ControlFlowTok{for}\NormalTok{(current_id }\ControlFlowTok{in}\NormalTok{ mrna_gene_ids)\{}
+\NormalTok{  expr_data <-}\StringTok{ }\NormalTok{expr.mrna[, current_id]  }\CommentTok{# Use ID as key to get expression data from the expr.mrna matrix}
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(annot.sample}\OperatorTok{$}\NormalTok{Sex, annot.sample}\OperatorTok{$}\NormalTok{Age, expr_data)}
+  \KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sex"}\NormalTok{, }\StringTok{"Age"}\NormalTok{, }\StringTok{"expr"}\NormalTok{)}
+  
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(df)}
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{sex_factor =} \KeywordTok{factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex))}
+  \KeywordTok{levels}\NormalTok{(df}\OperatorTok{$}\NormalTok{sex_factor) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)}
+  
+\NormalTok{  gene_row <-}\StringTok{ }\NormalTok{annot.mrna }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(id }\OperatorTok{==}\StringTok{ }\NormalTok{current_id)}
+\NormalTok{  symbol =}\StringTok{ }\NormalTok{gene_row}\OperatorTok{$}\NormalTok{symbol}
+  
+
+  \CommentTok{# Perform t-test on sex}
+  \CommentTok{# Seperate groups}
+\NormalTok{  males <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  females <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  res.t <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ males}\OperatorTok{$}\NormalTok{expr, }\DataTypeTok{y =}\NormalTok{ females}\OperatorTok{$}\NormalTok{expr)}
+  
+\NormalTok{  sex.p.value <-}\StringTok{ }\NormalTok{res.t}\OperatorTok{$}\NormalTok{p.value}
+  \CommentTok{# if (sex.p.value < 0.05) \{}
+  \CommentTok{# }
+  \CommentTok{#   plot_title <- paste("Age vs", symbol, " (", current_id, ") ", "Expression", sep = " ")}
+  \CommentTok{# }
+  \CommentTok{#   plot_age <- ggplot(df, aes(x=factor(df$Age), y=expr, color=factor(df$Age))) +}
+  \CommentTok{#     geom_boxplot() + }
+  \CommentTok{#     geom_smooth(method = "lm", se = FALSE) + ggtitle(plot_title) +}
+  \CommentTok{#     ylab("Normalized Expression level") +}
+  \CommentTok{#     xlab("Age")}
+  \CommentTok{# }
+  \CommentTok{#   print(plot_age)}
+  \CommentTok{# }
+  \CommentTok{# \}}
+  
+  \CommentTok{# Perform ANOVA on age}
+\NormalTok{  age_}\DecValTok{6}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{)}
+\NormalTok{  age_}\DecValTok{12}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{12}\NormalTok{)}
+\NormalTok{  age_}\DecValTok{18}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{18}\NormalTok{)}
+  
+\NormalTok{  res.aov <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(df}\OperatorTok{$}\NormalTok{expr }\OperatorTok{~}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{Age, }\DataTypeTok{data =}\NormalTok{ df)}
+\NormalTok{  sum_obj <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(res.aov)}
+\NormalTok{  age.p.value <-}\StringTok{ }\NormalTok{sum_obj[[}\DecValTok{1}\NormalTok{]][, }\DecValTok{5}\NormalTok{][}\DecValTok{1}\NormalTok{]}
+  
+  \CommentTok{# if (age.p.value < 0.05) \{}
+  \CommentTok{# }
+  \CommentTok{#   plot_title <- paste("Sex vs", symbol, " (", current_id, ") ", "Expression", sep = " ")}
+  \CommentTok{# }
+  \CommentTok{#   plot_sex <- ggplot(df, aes(x=factor(df$Sex), y=expr, color=df$sex_factor)) +}
+  \CommentTok{#     geom_boxplot() + }
+  \CommentTok{#     geom_smooth(method = "lm", se = FALSE) + }
+  \CommentTok{#     ggtitle(plot_title) +}
+  \CommentTok{#     ylab("Normalized Expression level") +}
+  \CommentTok{#     xlab("Sex")}
+  \CommentTok{# }
+  \CommentTok{#   print(plot_sex)}
+  \CommentTok{# \}}
+  
+
+  \ControlFlowTok{if}\NormalTok{ (age.p.value }\OperatorTok{<}\StringTok{ }\FloatTok{0.05} \OperatorTok{&&}\StringTok{ }\NormalTok{sex.p.value }\OperatorTok{<}\StringTok{ }\NormalTok{.}\DecValTok{05}\NormalTok{)\{}
+\NormalTok{    df}\OperatorTok{$}\NormalTok{Age <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age)}
+
+\NormalTok{    summary_df <-}\StringTok{ }\KeywordTok{summarySE}\NormalTok{(df, }\DataTypeTok{measurevar=}\StringTok{"expr"}\NormalTok{, }\DataTypeTok{groupvars=}\KeywordTok{c}\NormalTok{(}\StringTok{"sex_factor"}\NormalTok{, }\StringTok{"Age"}\NormalTok{))}
+\NormalTok{    plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(summary_df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Age, }\DataTypeTok{y=}\NormalTok{expr, }\DataTypeTok{color =}\NormalTok{ sex_factor, }\DataTypeTok{group =}\NormalTok{ sex_factor)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin=}\NormalTok{expr}\OperatorTok{-}\NormalTok{se, }\DataTypeTok{ymax=}\NormalTok{expr}\OperatorTok{+}\NormalTok{se), }\DataTypeTok{width=}\NormalTok{.}\DecValTok{1}\NormalTok{, }\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\DataTypeTok{size=}\DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{ggtitle}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{paste}\NormalTok{(symbol, }\StringTok{" ("}\NormalTok{, current_id, }\StringTok{") "}\NormalTok{, }\StringTok{" Expression"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{ylab}\NormalTok{(}\DataTypeTok{label =} \StringTok{"Normalized Expression Level"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{xlab}\NormalTok{(}\DataTypeTok{label =} \StringTok{"Age (months)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{color =} \StringTok{"Sex"}\NormalTok{)}
+    \KeywordTok{print}\NormalTok{(plot)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Nduf_subset_prot <-}\StringTok{ }\NormalTok{annot.protein }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(symbol, }\StringTok{"Nduf"}\NormalTok{))}
+\NormalTok{prot_gene_ids <-}\StringTok{ }\NormalTok{Nduf_subset_prot}\OperatorTok{$}\NormalTok{id}
+\ControlFlowTok{for}\NormalTok{(current_id }\ControlFlowTok{in}\NormalTok{ prot_gene_ids)\{}
+
+\NormalTok{  expr_data <-}\StringTok{ }\NormalTok{expr.protein[, current_id]  }\CommentTok{# Use ID as key to get expression data from the expr.mrna matrix}
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(annot.sample}\OperatorTok{$}\NormalTok{Sex, annot.sample}\OperatorTok{$}\NormalTok{Age, expr_data)}
+  \KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sex"}\NormalTok{, }\StringTok{"Age"}\NormalTok{, }\StringTok{"expr"}\NormalTok{)}
+  
+
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(df)}
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{sex_factor =} \KeywordTok{factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex))}
+  \KeywordTok{levels}\NormalTok{(df}\OperatorTok{$}\NormalTok{sex_factor) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)}
+  
+\NormalTok{  gene_row <-}\StringTok{ }\NormalTok{annot.protein }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(id }\OperatorTok{==}\StringTok{ }\NormalTok{current_id)}
+\NormalTok{  symbol =}\StringTok{ }\NormalTok{gene_row}\OperatorTok{$}\NormalTok{symbol}
+  
+
+  \CommentTok{# Perform t-test on sex}
+
+\NormalTok{  males <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  females <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  res.t <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ males}\OperatorTok{$}\NormalTok{expr, }\DataTypeTok{y =}\NormalTok{ females}\OperatorTok{$}\NormalTok{expr)}
+\NormalTok{  sex.p.value <-}\StringTok{ }\NormalTok{res.t}\OperatorTok{$}\NormalTok{p.value}
+  
+  \CommentTok{# Only plot if there is a significant result}
+  \CommentTok{# if (sex.p.value < 0.05) \{}
+  \CommentTok{#   plot_title <- paste("Age vs", symbol, " (", current_id, ") ", "Expression", sep = " ")}
+  \CommentTok{# }
+  \CommentTok{#   plot_age <- ggplot(df, aes(x=factor(df$Age), y=expr, color=factor(df$Age))) +}
+  \CommentTok{#     geom_boxplot() + }
+  \CommentTok{#     geom_smooth(method = "lm", se = FALSE) + ggtitle(plot_title) +}
+  \CommentTok{#     ylab("Normalized Expression level") +}
+  \CommentTok{#     xlab("Age")}
+  \CommentTok{# }
+  \CommentTok{#   print(plot_age)}
+  \CommentTok{# }
+  \CommentTok{# \}}
+  
+  \CommentTok{# Perform ANOVA on age}
+\NormalTok{  age_}\DecValTok{6}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{6}\NormalTok{)}
+\NormalTok{  age_}\DecValTok{12}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{12}\NormalTok{)}
+\NormalTok{  age_}\DecValTok{18}\NormalTok{ <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age }\OperatorTok{==}\StringTok{ }\DecValTok{18}\NormalTok{)}
+  
+\NormalTok{  res.aov <-}\StringTok{ }\KeywordTok{aov}\NormalTok{(df}\OperatorTok{$}\NormalTok{expr }\OperatorTok{~}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{Age, }\DataTypeTok{data =}\NormalTok{ df)}
+\NormalTok{  sum_obj <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(res.aov)}
+\NormalTok{  age.p.value <-}\StringTok{ }\NormalTok{sum_obj[[}\DecValTok{1}\NormalTok{]][, }\DecValTok{5}\NormalTok{][}\DecValTok{1}\NormalTok{]}
+  
+  \CommentTok{# if (age.p.value < 0.05) \{}
+  \CommentTok{#   plot_title <- paste("Sex vs", symbol, " (", current_id, ") ", "Expression", sep = " ")}
+  \CommentTok{#   # We specify the ID of the protein it is encoding because one gene symbol can help encode multiple proteins.}
+  \CommentTok{#   }
+  \CommentTok{# }
+  \CommentTok{#   plot_sex <- ggplot(df, aes(x=factor(df$Sex), y=expr, color=df$sex_factor)) +}
+  \CommentTok{#     geom_boxplot() + }
+  \CommentTok{#     geom_smooth(method = "lm", se = FALSE) + }
+  \CommentTok{#     ggtitle(plot_title) +}
+  \CommentTok{#     ylab("Normalized Expression level") +}
+  \CommentTok{#     xlab("Sex")}
+  \CommentTok{# }
+  \CommentTok{#   print(plot_sex)}
+  \CommentTok{# \}}
+  
+  
+  \ControlFlowTok{if}\NormalTok{ (sex.p.value }\OperatorTok{<}\StringTok{ }\FloatTok{0.05} \OperatorTok{&&}\StringTok{ }\NormalTok{age.p.value }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{)\{}
+\NormalTok{    df}\OperatorTok{$}\NormalTok{Age <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{Age)}
+\NormalTok{    summary_df <-}\StringTok{ }\KeywordTok{summarySE}\NormalTok{(df, }\DataTypeTok{measurevar=}\StringTok{"expr"}\NormalTok{, }\DataTypeTok{groupvars=}\KeywordTok{c}\NormalTok{(}\StringTok{"sex_factor"}\NormalTok{, }\StringTok{"Age"}\NormalTok{))}
+\NormalTok{    plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(summary_df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Age, }\DataTypeTok{y=}\NormalTok{expr, }\DataTypeTok{color =}\NormalTok{ sex_factor, }\DataTypeTok{group =}\NormalTok{ sex_factor)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin=}\NormalTok{expr}\OperatorTok{-}\NormalTok{se, }\DataTypeTok{ymax=}\NormalTok{expr}\OperatorTok{+}\NormalTok{se), }\DataTypeTok{width=}\NormalTok{.}\DecValTok{1}\NormalTok{, }\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{position=}\KeywordTok{position_dodge}\NormalTok{(}\FloatTok{0.1}\NormalTok{), }\DataTypeTok{size=}\DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{ggtitle}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{paste}\NormalTok{(symbol, }\StringTok{" ("}\NormalTok{, current_id, }\StringTok{") "}\NormalTok{, }\StringTok{"Expression"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{""}\NormalTok{)) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{ylab}\NormalTok{(}\DataTypeTok{label =} \StringTok{"Normalized Expression Level"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{xlab}\NormalTok{(}\DataTypeTok{label =} \StringTok{"Age (months)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{color =} \StringTok{"Sex"}\NormalTok{)}
+    \KeywordTok{print}\NormalTok{(plot)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## You have loaded plyr after dplyr - this is likely to cause problems.
+## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
+## library(plyr); library(dplyr)
+\end{verbatim}
+
+\begin{verbatim}
+## -------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize
+\end{verbatim}
+
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-1.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-2.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-3.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-4.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-5.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-6.pdf}
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-7.pdf}
+
+\begin{verbatim}
+## Warning: Removed 6 rows containing missing values (geom_errorbar).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 6 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Nduf_Analysis_V2_files/figure-latex/Nduf analysis-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Ndufaf4 (ubiquinone oxidoreductase complex assembly factor 4) is decreasing with age.}
+\CommentTok{# Mutations in the gene can cause mitochondrial complex I deficiency (https://www.genecards.org/cgi-bin/carddisp.pl?gene=NDUFAF4)}
+\CommentTok{# This can result in symptoms affecting the nervous system, the heart, and the skeletal muscles. (https://ghr.nlm.nih.gov/condition/mitochondrial-complex-i-deficiency)}
+
+\CommentTok{# Ndufaf2 (ubiquinone oxidoreductase complex assembly factor 2) seems to be increasing with age. Codes for }
+
+
+\CommentTok{# Note: ubiquinone oxidoreductase complex is located in the inner mitochondrial member in eurokaryotes.}
+\CommentTok{# Ndufv3 is much less expressed in females than it is in males.}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

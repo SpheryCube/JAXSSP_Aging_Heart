@@ -1,0 +1,309 @@
+---
+title: "Nduf Analysis"
+author: "Daniel Alfonsetti"
+date: "6/11/2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r setup, results='hide'}
+# Setup
+
+library(ggplot2)
+library(plyr)
+library(dplyr)
+library(stringr)
+load("/Users/c-alfond/Desktop/first_data/Data_R/DO189_heart_v2_noprobs.RData")
+
+ls()
+str(N)
+str(annot.samples)
+
+
+# This chunk of code was adapted from Gary Churchill's script
+# Convert chr to an ordered factor
+annot.mrna$chr <- factor(annot.mrna$chr,
+                         levels=c(as.character(1:19),"X","Y","M"))
+annot.protein$chr <- factor(annot.protein$ch,
+                            levels=c(as.character(1:19),"X","Y","M"))
+
+
+# Change some names
+# annot.protein <- rename(annot.protein, protein_id=id)
+# annot.protein <- rename(annot.protein, middle=middle_point)
+# annot.mrna <- rename(annot.mrna, gene_id=id)
+# annot.mrna <- rename(annot.mrna, middle=middle_point)
+# annot.samples <- rename(annot.samples, TMT=Tag, Sample.ID=Sample.Number)
+annot.sample <- transform(annot.samples, Batch=factor(substring(Batch,1,4)),
+                          NYGC.ID=substring(NYGC.ID,first=11),
+                          Sample.ID = as.integer(Sample.Number),
+                          Age=as.integer(Age), Sex=factor(Sex),
+                          Generation=factor(Generation,levels=c("G8","G9","G10","G11","G12")),
+                          f.Age=factor(Age, levels=c("6mos","12mos","18mos")))
+rm(annot.samples)
+
+# Save sex and age numeric values
+Sex <- as.numeric(as.factor(annot.sample$Sex))
+Age <- as.numeric(annot.sample$Age)
+
+# Note that there are no mitochondrial encoded proteins
+table(annot.mrna$chr)
+table(annot.protein$chr)
+table(annot.protein$chr[1:N$pairs], annot.mrna$chr[1:N$pairs])
+```
+
+
+```{r Helper functions, results='hide'}
+
+# Plotting helper function
+
+## Summarizes data. (This function was taken from http://www.cookbook-r.com/Manipulating_data/Summarizing_data/)
+## Gives count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%).
+##   data: a data frame.
+##   measurevar: the name of a column that contains the variable to be summariezed
+##   groupvars: a vector containing names of columns that contain grouping variables
+##   na.rm: a boolean that indicates whether to ignore NA's
+##   conf.interval: the percent range of the confidence interval (default is 95%)
+## Summarizes data.
+## Gives count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%).
+##   data: a data frame.
+##   measurevar: the name of a column that contains the variable to be summariezed
+##   groupvars: a vector containing names of columns that contain grouping variables
+##   na.rm: a boolean that indicates whether to ignore NA's
+##   conf.interval: the percent range of the confidence interval (default is 95%)
+summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+
+    # New version of length which can handle NA's: if na.rm==T, don't count them
+    length2 <- function (x, na.rm=FALSE) {
+        if (na.rm) sum(!is.na(x))
+        else       length(x)
+    }
+
+    # This does the summary. For each group's data frame, return a vector with
+    # N, mean, and sd
+    datac <- plyr::ddply(data, groupvars, .drop=.drop,
+      .fun = function(xx, col) {
+        c(N    = length2(xx[[col]], na.rm=na.rm),
+          mean = mean   (xx[[col]], na.rm=na.rm),
+          sd   = sd     (xx[[col]], na.rm=na.rm)
+        )
+      },
+      measurevar
+    )
+
+    # Rename the "mean" column    
+    datac <- plyr::rename(datac, c("mean" = measurevar))
+
+    datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval: 
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+    datac$ci <- datac$se * ciMult
+
+    return(datac)
+}
+
+```
+
+
+```{r Nduf analysis (mRNA), include= TRUE}
+
+# Note: I am only plotting expression levels for genes that show a significant difference (p<0.05) 
+# when grouped by sex AND when grouped by age.
+# In the case of the mRNA expression levels, no Nduf's satisfied this condition.
+
+# Analyze mRNA expression for Ndufs
+
+Nduf_subset_mrna <- annot.mrna %>% filter(str_detect(symbol, "Nduf"))
+mrna_gene_ids <- Nduf_subset_mrna$id
+
+# For each gene, check if age and sex account for variability within the data
+for(current_id in mrna_gene_ids){
+  expr_data <- expr.mrna[, current_id]  # Use ID as key to get expression data from the expr.mrna matrix
+  df <- cbind(annot.sample$Sex, annot.sample$Age, expr_data)
+  colnames(df) <- c("Sex", "Age", "expr")
+  
+  df <- as.data.frame(df)
+  df <- mutate(df, sex_factor = factor(df$Sex))
+  levels(df$sex_factor) <- c("Female", "Male")
+  
+  gene_row <- annot.mrna %>% filter(id == current_id)
+  symbol = gene_row$symbol
+  
+
+  # Perform t-test on sex
+  # Seperate groups
+  males <- df %>% filter(df$Sex == 1)
+  females <- df %>% filter(df$Sex == 2)
+  res.t <- t.test(x = males$expr, y = females$expr)
+  
+  sex.p.value <- res.t$p.value
+  # if (sex.p.value < 0.05) {
+  # 
+  #   plot_title <- paste("Age vs", symbol, " (", current_id, ") ", "Expression", sep = " ")
+  # 
+  #   plot_age <- ggplot(df, aes(x=factor(df$Age), y=expr, color=factor(df$Age))) +
+  #     geom_boxplot() + 
+  #     geom_smooth(method = "lm", se = FALSE) + ggtitle(plot_title) +
+  #     ylab("Normalized Expression level") +
+  #     xlab("Age")
+  # 
+  #   print(plot_age)
+  # 
+  # }
+  
+  # Perform ANOVA on age
+  age_6 <- df %>% filter(df$Age == 6)
+  age_12 <- df %>% filter(df$Age == 12)
+  age_18 <- df %>% filter(df$Age == 18)
+  
+  res.aov <- aov(df$expr ~ df$Age, data = df)
+  sum_obj <- summary(res.aov)
+  age.p.value <- sum_obj[[1]][, 5][1]
+  
+  # if (age.p.value < 0.05) {
+  # 
+  #   plot_title <- paste("Sex vs", symbol, " (", current_id, ") ", "Expression", sep = " ")
+  # 
+  #   plot_sex <- ggplot(df, aes(x=factor(df$Sex), y=expr, color=df$sex_factor)) +
+  #     geom_boxplot() + 
+  #     geom_smooth(method = "lm", se = FALSE) + 
+  #     ggtitle(plot_title) +
+  #     ylab("Normalized Expression level") +
+  #     xlab("Sex")
+  # 
+  #   print(plot_sex)
+  # }
+  
+
+  if (age.p.value < 0.05 && sex.p.value < 0.05){
+    df$Age <- as.factor(df$Age)
+
+    summary_df <- summarySE(df, measurevar="expr", groupvars=c("sex_factor", "Age"))
+    plot <- ggplot(summary_df, aes(x=Age, y=expr, color = sex_factor, group = sex_factor)) +
+      geom_errorbar(aes(ymin=expr-se, ymax=expr+se), width=.1, position=position_dodge(0.1)) +
+      geom_line(position=position_dodge(0.1)) +
+      geom_point(position=position_dodge(0.1), size=3) +
+      ggtitle(label = paste(symbol, " (", current_id, ") ", " Expression", sep = "")) +
+      ylab(label = "Normalized Expression Level") +
+      xlab(label = "Age (months)") +
+      labs(color = "Sex")
+    print(plot)
+  }
+}
+
+# No mRNAs have transcript expression that is significant on both sex and age.
+
+```
+
+
+
+```{r Nduf analysis (protein), include= TRUE}
+
+# Analyze protein expression for Ndufs
+
+Nduf_subset_prot <- annot.protein %>% filter(str_detect(symbol, "Nduf"))
+prot_gene_ids <- Nduf_subset_prot$id
+for(current_id in prot_gene_ids){
+
+  expr_data <- expr.protein[, current_id]  # Use ID as key to get expression data from the expr.mrna matrix
+  df <- cbind(annot.sample$Sex, annot.sample$Age, expr_data)
+  colnames(df) <- c("Sex", "Age", "expr")
+  
+
+  df <- as.data.frame(df)
+  df <- mutate(df, sex_factor = factor(df$Sex))
+  levels(df$sex_factor) <- c("Female", "Male")
+  
+  gene_row <- annot.protein %>% filter(id == current_id)
+  symbol = gene_row$symbol
+  
+
+  # Perform t-test on sex
+
+  males <- df %>% filter(df$Sex == 1)
+  females <- df %>% filter(df$Sex == 2)
+  res.t <- t.test(x = males$expr, y = females$expr)
+  sex.p.value <- res.t$p.value
+  
+  # Only plot if there is a significant result
+  # if (sex.p.value < 0.05) {
+  #   plot_title <- paste("Age vs", symbol, " (", current_id, ") ", "Expression", sep = " ")
+  # 
+  #   plot_age <- ggplot(df, aes(x=factor(df$Age), y=expr, color=factor(df$Age))) +
+  #     geom_boxplot() + 
+  #     geom_smooth(method = "lm", se = FALSE) + ggtitle(plot_title) +
+  #     ylab("Normalized Expression level") +
+  #     xlab("Age")
+  # 
+  #   print(plot_age)
+  # 
+  # }
+  
+  # Perform ANOVA on age
+  age_6 <- df %>% filter(df$Age == 6)
+  age_12 <- df %>% filter(df$Age == 12)
+  age_18 <- df %>% filter(df$Age == 18)
+  
+  res.aov <- aov(df$expr ~ df$Age, data = df)
+  sum_obj <- summary(res.aov)
+  age.p.value <- sum_obj[[1]][, 5][1]
+  
+  # if (age.p.value < 0.05) {
+  #   plot_title <- paste("Sex vs", symbol, " (", current_id, ") ", "Expression", sep = " ")
+  #   # We specify the ID of the protein it is encoding because one gene symbol can help encode multiple proteins.
+  #   
+  # 
+  #   plot_sex <- ggplot(df, aes(x=factor(df$Sex), y=expr, color=df$sex_factor)) +
+  #     geom_boxplot() + 
+  #     geom_smooth(method = "lm", se = FALSE) + 
+  #     ggtitle(plot_title) +
+  #     ylab("Normalized Expression level") +
+  #     xlab("Sex")
+  # 
+  #   print(plot_sex)
+  # }
+  
+  
+  if (sex.p.value < 0.05 && age.p.value < 0.05){
+    df$Age <- as.factor(df$Age)
+    summary_df <- summarySE(df, measurevar="expr", groupvars=c("sex_factor", "Age"))
+    plot <- ggplot(summary_df, aes(x=Age, y=expr, color = sex_factor, group = sex_factor)) +
+      geom_errorbar(aes(ymin=expr-se, ymax=expr+se), width=.1, position=position_dodge(0.1)) +
+      geom_line(position=position_dodge(0.1)) +
+      geom_point(position=position_dodge(0.1), size=3) +
+      ggtitle(label = paste(symbol, " (", current_id, ") ", "Expression", sep = "")) +
+      ylab(label = "Normalized Expression Level") +
+      xlab(label = "Age (months)") +
+      labs(color = "Sex")
+    print(plot)
+  }
+}
+
+
+
+# 'Nduf's are related to the proteins in the electron transport chain.
+
+# Ndufaf4 (ubiquinone oxidoreductase complex assembly factor 4) is decreasing with age.
+# Mutations in the gene can cause mitochondrial complex I deficiency (https://www.genecards.org/cgi-bin/carddisp.pl?gene=NDUFAF4)
+# This can result in symptoms affecting the nervous system, the heart, and the skeletal muscles. (https://ghr.nlm.nih.gov/condition/mitochondrial-complex-i-deficiency)
+
+# Ndufaf5 is also decreasing with age overall.
+
+# Interestingly, Ndufaf2 (ubiquinone oxidoreductase complex assembly factor 2) seems to be increasing with age overall.
+
+# Ndufs4 is also decreasing with age overall, although the trend is not as pronounced.
+# Mutations in this gene can cause mitochondrial complex I deficiencies such as Leigh syndrome.
+# (https://www.genecards.org/cgi-bin/carddisp.pl?gene=NDUFS4)
+
+# Ndufv3 (Ubiquinone Oxidoreductase Subunit V3). "Diseases associated with NDUFV3 include Nonsyndromic Deafness"
+# https://www.genecards.org/cgi-bin/carddisp.pl?gene=NDUFV3
+
+
+```
+

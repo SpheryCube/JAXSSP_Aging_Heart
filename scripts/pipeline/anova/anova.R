@@ -22,7 +22,8 @@ rm(list=ls())
 # Using HPC directories
 input <- "/fastscratch/c-alfond/do_heart/data/cleaned_data.RData"
 load(input)
-output_prefix <- "/fastscratch/c-alfond/do_heart/results/"
+output_prefix <- "/fastscratch/c-alfond/do_heart/results/anova/"
+dir.create(output_prefix)
 
 #######################
 # Load in libraries

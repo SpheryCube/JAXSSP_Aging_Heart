@@ -11,7 +11,7 @@ rm(list=ls())
 input <- "~/do_heart/data/cleaned_data.RData"
 load(input)
 output_dir <- "~/do_heart/results/global_enrichment_allez/"
-
+dir.create(output_dir)
 # Using HPC directories
 # input <- "/home/c-alfond/do_heart/data/cleaned_data.RData"
 # load(input)
