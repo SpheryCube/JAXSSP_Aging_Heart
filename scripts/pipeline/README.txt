@@ -13,6 +13,8 @@ There are two seperate pipelines. The first one does correlations, ANOVAs, and g
 7. global_enrichment_allez.R
 8. allez_category_reduce.R
 
+To understand what each file does more specifially, read the description at the top of each.
+
 The second one analyses additive and interactive QTL mapping, QTL hotspots, and allele/genotype effects.
 It is broken down into two folders: scans/ and hotspots/
 
