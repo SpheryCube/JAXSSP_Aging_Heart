@@ -245,8 +245,6 @@ foreach (hotspot_output_dir = hotspot_output_dirs) %dopar% {
         scan_output_add <- scan1(genoprobs = genoprobs[,qtl_chr], pheno = expr.data, kinship = kin_mat_list[[qtl_chr]], addcovar = cbind(sex, age), cores = num_cores)
         scan_output_effect <- scan_output_full - scan_output_add
         
-        scan_output_add <- scan1(genoprobs = genoprobs[,qtl_chr], pheno = expr.data, kinship = kin_mat_list[[qtl_chr]], addcovar = cbind(sex, age), cores = num_cores)
-        
         # Plot
         plot(x = scan_output_full, map = gmap[qtl_chr], col = color[1])
         plot(x = scan_output_add, map = gmap[qtl_chr], col = color[2], add = TRUE)

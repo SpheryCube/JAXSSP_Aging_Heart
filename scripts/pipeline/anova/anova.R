@@ -1,4 +1,4 @@
-# Original author: Yuka
+# Original author: Yuka Takemon
 # Modified by Daniel Alfonsetti June 18, 2018
 
 # This script was slightly modified from Yuka's script (https://github.com/TheJacksonLaboratory/JAC_DO_Kidney/blob/master/ANOVA/anova_tests_slope_pairs.R)

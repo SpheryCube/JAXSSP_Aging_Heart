@@ -1,7 +1,7 @@
-# correlations
 # Author: Daniel Alfonsetti
 # Date: July 26, 2018 
-# Description: Computes raw, sex adjusted, and age adjusted correlations between protein and mRNA expression levels.
+
+# Computes raw, sex adjusted, and age adjusted correlations between protein and mRNA expression levels.
 # and plots the results
 
 #######################
@@ -96,7 +96,7 @@ colnames(corrs_only) <- c("Raw", "Sex Adjusted", "Age Adjusted")
 corrs_by_group <- stack(corrs_only)
 corrs_by_group$ind <- factor(corrs_by_group$ind, levels = c("Raw", "Sex Adjusted", "Age Adjusted"))
 
-setwd(output_dir)
+setwd(output_prefix)
 pdf(file = "mrna_protein_cors.pdf")
 p <- ggplot(data = corrs_by_group, aes(values)) +
   geom_histogram(breaks=seq(-0.5, 1, by=0.01),

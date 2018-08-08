@@ -1,6 +1,15 @@
 /results
 
 This folder contains outputs from the scripts in /scripts. In particular, it contains several subdirectories corresponding to subdirectories in in /scripts. QTL peak table files are in this current directory.
+------------------------------
+File structure
+------------------------------
+anova/ - results from ANOVA scripts and the gene set enrichment analysis done on each quadrant of the mRNA-Age vs protein-Age correlations plot
+global_enrichment_allez/ - Enrichment analysis results after performing differential expression on age and differential expression on sex
+hotspots/ - Results from the hotspots output
+mrna_protein_cors/ - 
+
+
 
 ------------------------------
 Peak file title interpretation:
