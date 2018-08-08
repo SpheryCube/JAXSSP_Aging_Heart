@@ -1,6 +1,6 @@
 /scripts/pipeline/
 
-Scripts in this folder 
+
 
 1. clean_data.R
 
@@ -18,3 +18,11 @@ It is broken down into two folders: scans/ and hotspots/
 
 scans/ -  A folder containing files to run additivie and interactive QTL scans and then extract peak tables.
 hotspots/ - A folder containing scripts to find hotspots regions in each type of QTL scan and then analyze the genes that have QTLs in those hotspots.
+
+The order to run files in qtls/ is as follows:
+
+1. scans/qtl.R
+2. scans/get_qtl_peaks.R
+3. hotspots/QTL_hotspots.R
+4. hotspots/qtl_allele_effects_stratified.R
+5. hotspots/mediation_analysis.R

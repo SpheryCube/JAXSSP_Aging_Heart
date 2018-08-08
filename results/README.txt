@@ -5,10 +5,14 @@ This folder contains outputs from the scripts in /scripts. In particular, it con
 File structure
 ------------------------------
 anova/ - results from ANOVA scripts and the gene set enrichment analysis done on each quadrant of the mRNA-Age vs protein-Age correlations plot
-global_enrichment_allez/ - Enrichment analysis results after performing differential expression on age and differential expression on sex
-hotspots/ - Results from the hotspots output
-mrna_protein_cors/ - 
 
+global_enrichment_allez/ - Enrichment analysis results after performing differential expression on age and differential expression on sex
+
+hotspots/ - Results from the hotspots output. Has many subdirectories
+
+mrna_protein_cors/ - Correlation outputs between mrna and their respective protein. Gives raw, age-adjusted, and sex-adjusted results.
+
+mrna_protein-cors_by_age_sex/ - We looked to see if the correlations between mrna and their respective proteins changed with age. We found they did (they decreased on average), but the way in which they decreased was depenendent on sex. 
 
 
 ------------------------------
